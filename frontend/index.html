@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Library Book Tracker</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div>
+      <h1>Library Book Tracker</h1>
+      <p>Track books, availability, and borrowing activity.</p>
+    </div>
+    <button id="logoutBtn" class="secondary hidden">Logout</button>
+  </header>
+
+  <main class="container">
+    <section id="loginSection" class="card auth-card">
+      <h2>Login</h2>
+      <p class="muted">Demo librarian: <b>admin</b> / <b>admin123</b></p>
+      <form id="loginForm">
+        <label>Username<input id="username" required autocomplete="username"></label>
+        <label>Password<input id="password" type="password" required autocomplete="current-password"></label>
+        <button type="submit">Login</button>
+      </form>
+      <p id="loginMessage" class="message"></p>
+    </section>
+
+    <section id="appSection" class="hidden">
+      <div class="stats">
+        <div class="stat card"><span>Total Books</span><strong id="totalBooks">0</strong></div>
+        <div class="stat card"><span>Available</span><strong id="availableBooks">0</strong></div>
+        <div class="stat card"><span>Borrowed</span><strong id="borrowedBooks">0</strong></div>
+        <div class="stat card"><span>Members</span><strong id="memberCount">0</strong></div>
+      </div>
+
+      <div class="grid">
+        <section class="card">
+          <div class="section-heading">
+            <h2>Books</h2>
+            <button id="addBookBtn">Add Book</button>
+          </div>
+          <div class="toolbar">
+            <input id="searchInput" placeholder="Search title, author, ISBN...">
+            <select id="statusFilter">
+              <option value="">All status</option>
+              <option value="available">Available</option>
+              <option value="borrowed">Borrowed</option>
+            </select>
+          </div>
+          <div id="bookList" class="list"></div>
+        </section>
+
+        <section class="card">
+          <div class="section-heading">
+            <h2>Borrow / Return</h2>
+          </div>
+          <form id="transactionForm">
+            <label>Book
+              <select id="transactionBook" required></select>
+            </label>
+            <label>Member name<input id="memberName" required></label>
+            <label>Member email<input id="memberEmail" type="email" required></label>
+            <button type="submit">Borrow Book</button>
+          </form>
+          <hr>
+          <h3>Recent Transactions</h3>
+          <div id="transactionList" class="list"></div>
+        </section>
+      </div>
+    </section>
+  </main>
+
+  <dialog id="bookDialog">
+    <form method="dialog" id="bookForm" class="dialog-form">
+      <h2 id="dialogTitle">Add Book</h2>
+      <input type="hidden" id="bookId">
+      <label>Title<input id="bookTitle" required maxlength="150"></label>
+      <label>Author<input id="bookAuthor" required maxlength="120"></label>
+      <label>ISBN<input id="bookIsbn" maxlength="30"></label>
+      <label>Category<input id="bookCategory" maxlength="80"></label>
+      <label>Publication Year<input id="bookYear" type="number" min="0" max="2100"></label>
+      <div class="dialog-actions">
+        <button type="button" id="cancelBookBtn" class="secondary">Cancel</button>
+        <button type="submit">Save Book</button>
+      </div>
+      <p id="bookMessage" class="message"></p>
+    </form>
+  </dialog>
+
+  <div id="toast" class="toast"></div>
+  <script src="app.js"></script>
+</body>
+</html>
